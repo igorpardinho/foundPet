@@ -1,15 +1,73 @@
-# Elysia with Bun runtime
 
-## Getting Started
-To get started with this template, simply paste this command into your terminal:
+# FoundPet API 🐾
+
+Backend service built with Bun and Elysia, focused on performance, type safety, and a clean modular architecture.
+This project serves as the backend for the FoundPet application, responsible for managing pets, health checks, and future domain modules.
+## 🚀 Tech Stack
+
++ Runtime: Bun
+
++ Framework: Elysia
+
++ Database: SQLite
+
++ ORM: Drizzle ORM
+
++ Language: TypeScript
+
++ Validation: TypeBox (Elysia standard)
+## ⚙️ Getting Started
+
+### Pre-requisites
+
+Bun installed (v1.0+)
+
+### Installation
+
+Clone the repository and install dependencies:
+
 ```bash
-bun create elysia ./elysia-example
+bun install
 ```
+## 🧪 Running the Application
 
-## Development
-To start the development server run:
+Start the development server:
+
 ```bash
 bun run dev
 ```
 
-Open http://localhost:3000/ with your browser to see the result.
+The API will be available at:
+
+http://localhost:3000
+## 📌 Health Check
+
+Example endpoint:
+
+GET /health
+
+Response:
+
+{
+  "status": "ok"
+}
+## 🧠 Design Principles
+
+Modular architecture by domain
+
+DTO-driven validation
+
+Clear separation of concerns
+
+HTTP semantics respected (status codes, PATCH behavior, etc.)
+
+Minimal abstractions, maximum clarity
+
+
+## Autores
+
+- [@igorpardinho](https://www.github.com/igorpardinho)
+
+
+
+
