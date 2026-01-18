@@ -61,4 +61,8 @@ export class PetRepository {
             .returning();
         return updatedPet;
     }
+
+    async delete(id: string) {
+        await db.delete(pets).where(eq(pets.id, id));
+    }
 }

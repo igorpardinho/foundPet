@@ -37,4 +37,9 @@ export const petRoutes = new Elysia()
         {
             body: UpdatePetDto,
         },
-    );
+    )
+    .delete("/pets/:id", async ({ set, params }) => {
+        await petService.delete(params.id);
+        set.status = 204;
+        return;
+    });

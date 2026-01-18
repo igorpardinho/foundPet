@@ -24,4 +24,8 @@ export class PetService {
     async update(id: string, data: UpdatePetInput) {
         return await this.petRepository.update(id, data);
     }
+
+    async delete(id: string) {
+        await this.petRepository.delete(id);
+    }
 }
