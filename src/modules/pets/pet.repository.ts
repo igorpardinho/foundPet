@@ -1,7 +1,7 @@
 import { db } from "../../shared/database/drizzle";
 import { pets } from "../../shared/database/schema/pet.schema";
 import { eq, sql } from "drizzle-orm";
-import { CreatePetInput } from "./pet.dto";
+import { CreatePetInput, UpdatePetInput } from "./pet.dto";
 
 export class PetRepository {
     async create(data: CreatePetInput) {
@@ -16,9 +16,9 @@ export class PetRepository {
             weight: data.weight,
             behavior: data.behavior,
             vaccine: data.vaccine,
-            castration: data.castration ? 1 : 0,
+            castration: data.castration,
             comorbidities: data.comorbidities,
-            accompanied: data.accompanied ? 1 : 0,
+            accompanied: data.accompanied,
             city: data.city,
         });
 
@@ -51,5 +51,14 @@ export class PetRepository {
     async findById(id: string) {
         const [pet] = await db.select().from(pets).where(eq(pets.id, id));
         return pet;
+    }
+
+    async update(id: string, data: UpdatePetInput) {
+        const [updatedPet] = await db
+            .update(pets)
+            .set(data)
+            .where(eq(pets.id, id))
+            .returning();
+        return updatedPet;
     }
 }

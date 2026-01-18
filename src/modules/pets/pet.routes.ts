@@ -1,6 +1,6 @@
 import Elysia from "elysia";
 import { PetService } from "./pet.service";
-import { CreatePetDto } from "./pet.dto";
+import { CreatePetDto, UpdatePetDto } from "./pet.dto";
 
 const petService = new PetService();
 
@@ -28,4 +28,13 @@ export const petRoutes = new Elysia()
     )
     .get("/pets/:id", async ({ params }) => {
         return await petService.findById(params.id);
-    });
+    })
+    .patch(
+        "/pets/:id",
+        async ({ body, params }) => {
+            return await petService.update(params.id, body);
+        },
+        {
+            body: UpdatePetDto,
+        },
+    );
