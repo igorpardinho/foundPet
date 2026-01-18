@@ -8,6 +8,27 @@
       "when": 1768668353991,
       "tag": "0000_fat_enchantress",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1768717834998,
+      "tag": "0001_modern_scalphunter",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1768717896806,
+      "tag": "0002_thick_frog_thor",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1768718379604,
+      "tag": "0003_big_grim_reaper",
+      "breakpoints": true
     }
   ]
 }
