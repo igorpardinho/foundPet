@@ -13,7 +13,11 @@ export class PetService {
 
   async findAll(page = 1, limit = 10) {
     if (page < 0) page = 1;
-    if (limit < 0) limit = 10;
-    return this.petRepository.findAllPaginated(page, limit);
+      if (limit < 0) limit = 10;
+      return this.petRepository.findAllPaginated(page, limit);
+  }
+    
+  async findById(id: string) {
+    return await this.petRepository.findById(id);
   }
 }
