@@ -10,7 +10,10 @@ export const petRoutes = new Elysia().group("/pets", (app) => {
         .get(
             "",
             async ({ query }) => {
-                return await petService.findAll(query.page, query.limit);
+                return await petService.findAllPaginated(
+                    query.page,
+                    query.limit,
+                );
             },
             { query: PaginationQuery },
         )

@@ -1,5 +1,5 @@
-import { UpdatePetInput } from "../pets/pet.dto";
-import { CreateUserInput } from "./user.dto";
+import { NotFoundException } from "../../shared/errors/not-found.exception";
+import { CreateUserInput, UpdateUserInput } from "./user.dto";
 import { UserRepository } from "./user.repository";
 
 export class UserService {
@@ -14,18 +14,31 @@ export class UserService {
     }
 
     async findById(id: string) {
-        return await this.userRepository.findById(id);
+        const user = await this.userRepository.findById(id);
+        if (!user) {
+            throw new NotFoundException("User");
+        }
+        return user;
     }
 
-    async findByEmail(email: string) {          
-        return await this.userRepository.findByEmail(email);
+    async findByEmail(email: string) {
+        const user = await this.userRepository.findByEmail(email);
+        if (!user) {
+            throw new NotFoundException("User");
+        }
+        return user;
     }
 
-    async update(id: string, data: UpdatePetInput) {
-        return await this.userRepository.update(id, data);
+    async update(id: string, data: UpdateUserInput) {
+        const user = await this.userRepository.update(id, data);
+        if (!user) {
+            throw new NotFoundException("User");
+        }
+        return user;
     }
 
     async delete(id: string) {
-        return await this.userRepository.delete(id);
+        await this.findById(id);
+        await this.userRepository.delete(id);
     }
 }
