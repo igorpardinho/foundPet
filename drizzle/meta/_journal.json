@@ -29,6 +29,20 @@
       "when": 1768718379604,
       "tag": "0003_big_grim_reaper",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1768934205342,
+      "tag": "0004_icy_baron_zemo",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1768937749867,
+      "tag": "0005_lush_gunslinger",
+      "breakpoints": true
     }
   ]
 }

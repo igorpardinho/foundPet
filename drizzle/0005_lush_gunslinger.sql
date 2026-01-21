@@ -1,0 +1,1 @@
+ALTER TABLE `ongs` ADD `city` text NOT NULL;
