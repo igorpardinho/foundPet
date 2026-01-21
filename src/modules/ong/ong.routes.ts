@@ -1,16 +1,46 @@
 import Elysia from "elysia";
 import { OngService } from "./ong.service";
-import { CreateOngDto } from "./ong.dto";
+import { CreateOngDto, UpdateOngDto } from "./ong.dto";
+import { PaginationQuery } from "../../utils/pagination.dto";
+import { NotFoundException } from "../../shared/errors/not-found.exception";
 
 const ongService = new OngService();
 export const ongRoutes = new Elysia().group("/ongs", (app) => {
-    return app.post(
-        "",
-        async ({ body }) => {
-            return await ongService.create(body);
-        },
-        {
-            body: CreateOngDto,
-        },
-    );
+    return app
+        .post(
+            "",
+            async ({ body, set }) => {
+                set.status = 201;
+                return await ongService.create(body);
+            },
+            {
+                body: CreateOngDto,
+            },
+        )
+        .get(
+            "",
+            async ({ query }) => {
+                const { page, limit } = query;
+                return await ongService.findAllPaginated(page, limit);
+            },
+            {
+                query: PaginationQuery,
+            },
+        )
+        .get("/:id", async ({ params }) => {
+            return await ongService.findById(params.id);
+        })
+        .patch(
+            "/:id",
+            async ({ params, body }) => {
+                return await ongService.update(params.id, body);
+            },
+            {
+                body: UpdateOngDto,
+            },
+        )
+        .delete("/:id", async ({ params, set }) => {
+            set.status = 204;
+            return await ongService.delete(params.id);
+        });
 });
