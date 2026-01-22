@@ -4,7 +4,18 @@ import { eq, sql } from "drizzle-orm";
 import { CreatePetInput, UpdatePetInput } from "./pet.dto";
 
 export class PetRepository {
-    
+    async create(data: CreatePetInput & { ongId: string }) {
+        const id = crypto.randomUUID();
+        const [pet] = await db
+            .insert(pets)
+            .values({
+                id,
+                ...data,
+            })
+            .returning();
+
+        return pet;
+    }
 
     async findAllPaginated(page = 1, limit = 10) {
         const offset = (page - 1) * limit;

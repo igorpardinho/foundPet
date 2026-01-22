@@ -3,6 +3,7 @@ import { OngService } from "./ong.service";
 import { CreateOngDto, UpdateOngDto } from "./ong.dto";
 import { PaginationQuery } from "../../utils/pagination.dto";
 import { NotFoundException } from "../../shared/errors/not-found.exception";
+import { CreatePetDto } from "../pets/pet.dto";
 
 const ongService = new OngService();
 export const ongRoutes = new Elysia().group("/ongs", (app) => {
@@ -42,5 +43,15 @@ export const ongRoutes = new Elysia().group("/ongs", (app) => {
         .delete("/:id", async ({ params, set }) => {
             set.status = 204;
             return await ongService.delete(params.id);
-        });
+        })
+        .post(
+            "/:ongId/pets",
+            async ({ params, body, set }) => {
+                set.status = 201;
+                return await ongService.createPet(params.ongId, body);
+            },
+            {
+                body: CreatePetDto,
+            },
+        );
 });

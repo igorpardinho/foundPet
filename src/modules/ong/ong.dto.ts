@@ -5,7 +5,7 @@ export const CreateOngDto = Type.Object({
     cnpj: Type.String({
         minLength: 10,
     }),
-    city:Type.String({minLength:2}),
+    city: Type.String({ minLength: 2 }),
     phone: Type.String({ minLength: 9 }),
     email: Type.String({ format: "email" }),
     size: Type.String({ minLength: 5 }),

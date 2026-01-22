@@ -1,9 +1,14 @@
 import { NotFoundException } from "../../shared/errors/not-found.exception";
+import { CreatePetInput } from "../pets/pet.dto";
+import { PetRepository } from "../pets/pet.repository";
 import { CreateOngInput, UpdateOngInput } from "./ong.dto";
 import { OngRepository } from "./ong.repository";
 
 export class OngService {
-    constructor(private readonly ongRepository = new OngRepository()) {}
+    constructor(
+        private readonly ongRepository = new OngRepository(),
+        private readonly petRepository = new PetRepository(),
+    ) {}
 
     async create(data: CreateOngInput) {
         const ong = await this.ongRepository.create(data);
@@ -33,5 +38,14 @@ export class OngService {
     async delete(id: string) {
         await this.ongRepository.findById(id);
         await this.ongRepository.delete(id);
+    }
+
+    async createPet(ongId: string, data: CreatePetInput) {
+        const ong = await this.ongRepository.findById(ongId);
+        if (!ong) throw new NotFoundException("Ong");
+        return await this.petRepository.create({
+            ...data,
+            ongId,
+        });
     }
 }
