@@ -8,14 +8,8 @@ export class OngRepository {
         const id = crypto.randomUUID();
         const ong = await db.insert(ongs).values({
             id,
-            name: data.name,
-            cnpj: data.cnpj,
-            city: data.city,
-            phone: data.phone,
-            email: data.email,
-            size: data.size,
-            pre_interview: data.pre_interview,
-        });
+            ...data
+        }).returning();
 
         return ong;
     }
@@ -39,7 +33,7 @@ export class OngRepository {
             page: page,
             limit: limit,
             total: total?.count ?? 0,
-            totalPages: Math.ceil(total?.count ?? 0 / limit),
+            totalPages: Math.ceil((total?.count ?? 0) / limit),
         };
     }
 

@@ -17,16 +17,7 @@ export const petRoutes = new Elysia().group("/pets", (app) => {
             },
             { query: PaginationQuery },
         )
-        .post(
-            "",
-            async ({ body, set }) => {
-                set.status = 201;
-                return await petService.create(body);
-            },
-            {
-                body: CreatePetDto,
-            },
-        )
+        
         .get("/:id", async ({ params }) => {
             return await petService.findById(params.id);
         })

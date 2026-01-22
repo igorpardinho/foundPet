@@ -1,7 +1,8 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { ongs } from "./ong.schema";
 
 export const pets = sqliteTable("pets", {
-    id: text("id").primaryKey(),
+    id: text("id").primaryKey().notNull(),
     name: text("name").notNull(),
     species: text("species").notNull(),
     photo: text("photo"),
@@ -14,4 +15,7 @@ export const pets = sqliteTable("pets", {
     comorbidities: text("comorbidities").notNull(),
     accompanied: integer("accompanied", { mode: "boolean" }).notNull(),
     city: text("city").notNull(),
+    ongId: text("ong_id")
+        .notNull()
+        .references(() => ongs.id, { onDelete: "cascade" }),
 });

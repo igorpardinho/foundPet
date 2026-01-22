@@ -5,9 +5,7 @@ import { PetRepository } from "./pet.repository";
 export class PetService {
     constructor(private readonly petRepository = new PetRepository()) {}
 
-    async create(data: CreatePetInput) {
-        return await this.petRepository.create(data);
-    }
+   
 
     async findAllPaginated(page = 1, limit = 10) {
         return this.petRepository.findAllPaginated(page, limit);

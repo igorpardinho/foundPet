@@ -4,26 +4,7 @@ import { eq, sql } from "drizzle-orm";
 import { CreatePetInput, UpdatePetInput } from "./pet.dto";
 
 export class PetRepository {
-    async create(data: CreatePetInput) {
-        const id = crypto.randomUUID();
-        const pet = await db.insert(pets).values({
-            id,
-            name: data.name,
-            species: data.species,
-            photo: data.photo ?? null,
-            age: data.age,
-            gender: data.gender,
-            weight: data.weight,
-            behavior: data.behavior,
-            vaccine: data.vaccine,
-            castration: data.castration,
-            comorbidities: data.comorbidities,
-            accompanied: data.accompanied,
-            city: data.city,
-        });
-
-        return pet;
-    }
+    
 
     async findAllPaginated(page = 1, limit = 10) {
         const offset = (page - 1) * limit;
@@ -44,7 +25,7 @@ export class PetRepository {
             page,
             limit,
             total: total?.count ?? 0,
-            totalPages: Math.ceil(total?.count ?? 0 / limit),
+            totalPages: Math.ceil((total?.count ?? 0) / limit),
         };
     }
 

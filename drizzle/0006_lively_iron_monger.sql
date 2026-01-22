@@ -1,0 +1,1 @@
+ALTER TABLE `pets` ADD `ong_id` text NOT NULL REFERENCES ongs(id);
