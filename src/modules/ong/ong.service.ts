@@ -48,4 +48,11 @@ export class OngService {
             ongId,
         });
     }
+
+    async findPetsForOng(id: string, page = 1, limit = 10) {
+        const ong = await this.ongRepository.findById(id);
+        if (!ong) throw new NotFoundException("Ong");
+
+        return await this.ongRepository.findPetsForOng(id, page, limit);
+    }
 }
