@@ -17,7 +17,7 @@ export class PetRepository {
         return pet;
     }
 
-    async findAllPaginated(page = 1, limit = 10) {
+    async findAllPaginated(page:number, limit:number) {
         const offset = (page - 1) * limit;
         const petsList = await db
             .select()
